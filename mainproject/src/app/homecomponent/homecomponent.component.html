@@ -1,0 +1,98 @@
+<div style="border:1px solid;height:550px;">
+<h5>FBook</h5>
+<div style="float:right;display:flex;margin-top:-30px;">  
+    <h5 style="margin-right:10px;cursor:pointer;" 
+    [class.highlighter]="isHome" (click)="homeValue()">Home</h5>
+    <h5 style="margin-right:10px;cursor:pointer;" 
+    [class.highlighter]="isUser" (click)="usersValue()" *ngIf="role=='admin'">Users</h5>
+    <h5 style="cursor:pointer;margin-right:10px;" 
+    [class.highlighter]="isNetwork" (click)="networkValue()">Network</h5>
+    <h5 style="cursor:pointer;margin-right:10px;" 
+    [class.highlighter]="isFriend" (click)="friendValue()">Friends</h5>
+    <h5 style="cursor:pointer;margin-right:10px;" 
+    [class.highlighter]="isSettings" (click)="settingsValue()">Setting</h5>
+    <h5 style="cursor:pointer;margin-right:10px;" (click)="logout()">Logout</h5>
+</div>
+
+<div class="container">
+    <div class="row">
+
+        <div class="col" style="margin-top:100px;" *ngIf="!isSettings">
+           <div style="border:1px solid;height:250px;">
+            <img style="border-radius:50%;margin-left:100px;margin-top:50px;
+            background-color: aliceblue;border:1px solid;
+            width:80px;height:80px;font-size:30px;" 
+            src={{userPhoto}} alt="upload pic">
+            <div style="margin-top:70px;">
+            <div style="border:1px solid;">
+                {{connections}} connections
+            </div>
+
+            <div style="border:1px solid;">
+                {{posts.length}} posts
+            </div>
+        </div>
+
+           </div>
+        </div>
+
+        <div class="col" style="margin-top:100px;" *ngIf="isHome">
+            <div style="border:1px solid;height:100px;">
+                <textarea rows="4" cols="50" (change)="doTextareaValueChange($event)">
+                </textarea>
+                <div style="display:flex;">
+           
+                <label class="image-upload-container btn btn-bwm">
+                  
+                    <input #imageInput
+                           type="file"
+                           accept="image/*"
+                           >
+                  </label>
+                <button class="btn btn-primary mr-1" (click)="createPost()">Post</button>
+            </div>
+
+            </div>
+
+            <div style="border:1px solid;margin-top:90px;">
+
+                <ul *ngFor="let post of posts">
+                    <li *ngIf="post.includes('assets')"><img src="{{post}}" style="width:30px;"></li>
+                    <li *ngIf="!post.includes('assets')">{{post}}</li>
+                </ul>
+                
+            </div>
+
+        </div>
+
+        <div class="col" style="margin-top:100px;" *ngIf="isFriend">
+        
+
+                <app-friend [connectionsList]="friendList"></app-friend>
+
+            
+
+        </div>
+
+        <div *ngIf="isNetwork" class="col" style="margin-top:100px;">
+
+            <app-network [connectionsList]="friendList"></app-network>
+
+        </div>
+
+        <div *ngIf="isSettings" class="col" style="margin-top:100px;">
+
+            <app-settings></app-settings>
+
+        </div>
+
+        <div *ngIf="isUser" class="col" style="margin-top:100px;">
+
+            <app-users></app-users>
+
+        </div>
+
+    </div>
+
+</div>
+</div>

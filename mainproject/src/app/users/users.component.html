@@ -1,0 +1,17 @@
+<table style="margin-left:300px;">
+
+    <ng-container *ngFor="let user of usersList">
+
+        <tr>
+            <td>
+                {{user.emailId}}
+            </td>
+            <td>
+                <button class="btn btn-primary mr-1" 
+                (click)="updateUser(user)">{{user.status}}</button>
+            </td>
+        </tr>
+
+    </ng-container>
+
+  </table>

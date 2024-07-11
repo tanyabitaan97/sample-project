@@ -1,0 +1,17 @@
+
+<div *ngFor="let friend of connectionsList;index as i">
+    <div style="border: 1px solid;display:flex;width:450px;height:50px;">
+
+        <div style="border:1px solid;border-radius: 50%;width:20%;border-color: blue;">
+            <span style="display: flex;justify-content: center;">  F-{{i+1}}</span>
+        </div>
+
+        <div style="margin-left:40px;">
+            {{friend.friendName}}
+        </div>
+        </div>
+
+    </div>
+  
+
+

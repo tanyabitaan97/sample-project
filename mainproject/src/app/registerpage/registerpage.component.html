@@ -1,0 +1,201 @@
+<div style="border:1px solid;">
+
+    <h5>FBook</h5>
+    <div style="float:right;display:flex;margin-top:-30px;">  
+        <h5 style="margin-right:10px;cursor:pointer;" 
+        [class.highlighter]="isRegister" (click)="registerSet()">Register</h5>
+        <h5 [class.highlighter]="isLogin" 
+        style="cursor:pointer;" (click)="loginSet()">Login</h5>
+    </div>
+
+    <div style="border:1px solid;" *ngIf="isRegister">
+        <br>
+        <h5 class="text-center">Registration</h5>
+        <form [formGroup]="registerForm">
+            <div class="form-row" style="display:flex;justify-content:center;">
+            <div class="form-group" style="margin-right:100px;">
+                <label for="firstName">First Name</label>
+                <input type="text" formControlName="firstName" class="form-control" 
+                [ngClass]="{ 'is-invalid': f.firstName.errors }">
+                <div *ngIf="f.firstName.errors">
+                    <div *ngIf="f.firstName.errors['required']"> <span class="text-danger">First Name is required</span></div>
+                </div>
+    
+            </div>
+
+           
+            </div>
+        
+            <div class="form-row" style="display:flex;justify-content:center;">
+            <div class="form-group" style="margin-right:100px;">
+                <label for="lastName" >Last Name</label>
+                <input type="text" formControlName="lastName" class="form-control"  
+                [ngClass]="{ 'is-invalid': f.lastName.errors }">
+                <div *ngIf="f.lastName.errors">
+                    <div *ngIf="f.lastName.errors['required']"><span class="text-danger">Last Name is required</span></div>
+                </div>
+            </div>
+          
+            </div>
+
+            <div class="form-row" style="display:flex;justify-content:center;">
+                <div class="form-group" style="margin-right:140px;">
+                    <label for="dob" >Date of Birth</label>
+                    <input type="date" formControlName="dob" class="form-control"  
+                    [ngClass]="{ 'is-invalid': f.dob.errors }">
+                    <div *ngIf="f.dob.errors">
+                        <div *ngIf="f.dob.errors['required']"><span class="text-danger">Date of birth is required</span></div>
+                    </div>
+                </div>
+              
+                </div>
+        
+            <div class="form-row" style="display:flex;justify-content:center;">
+            <div class="form-group" style="margin-right:100px;">
+                <label for="email">Email</label>
+                <input type="email" formControlName="email" class="form-control" 
+                [ngClass]="{ 'is-invalid': f.email.errors }">
+                <div *ngIf="f.email.errors">
+                    <div *ngIf="f.email.errors['required']"><span class="text-danger">Email is required</span></div>
+                    <div *ngIf="f.email.errors['email']"><span class="text-danger">Email must be a valid email address</span></div>
+                </div>
+            </div>
+            </div>
+        
+            <div class="form-row" style="display:flex;justify-content:center;">
+            <div class="form-group" style="margin-right:100px;">
+                <label for="password">Password</label>
+                <input type="password" formControlName="password" class="form-control" 
+                [ngClass]="{ 'is-invalid': f.password.errors }">
+
+                <div *ngIf="f['password'].errors">
+                    <div *ngIf="f['password'].errors['required']">
+                        <span class="text-danger">
+                            Password is required
+                        </span>
+    
+                    </div>
+                    <div *ngIf="f['password'].errors['minlength']">
+                        <span class="text-danger">
+                        Password must be at least 6 characters
+                        </span>
+                    </div>
+    
+                 </div>
+
+            </div>
+            </div>
+        
+        </form>
+
+        <div class="text-center">
+            <button class="btn btn-primary mr-1" (click)="login()">Login</button>
+
+            <button class="btn btn-primary mr-1" (click)="register()" 
+            [disabled]="!registerForm.value.email && !registerForm.value.password">Register</button>
+            </div>
+     
+
+    </div>
+
+    <div style="border:1px solid;" *ngIf="isLogin">
+
+        <br>
+        <h5 class="text-center">Login</h5>
+
+        <form [formGroup]="loginForm">
+
+            <div class="form-row" style="display:flex;justify-content:center;">
+                <div class="form-group" style="margin-right:100px;">
+                    <label for="email">User Name</label>
+                    <input type="email" formControlName="email" class="form-control" >
+             
+                </div>
+                </div>
+            
+                <div class="form-row" style="display:flex;justify-content:center;">
+                <div class="form-group" style="margin-right:100px;">
+                    <label for="password">Password</label>
+                    <input type="password" formControlName="password" class="form-control" >
+    
+    
+                </div>
+                </div>
+
+                <div class="text-center">
+                    <button class="btn btn-primary mr-1" (click)="forgotPasswordValue()">Forgot Password</button>
+        
+                    <button class="btn btn-primary mr-1" (click)="login()"  [disabled]="!loginForm.value.email && !loginForm.value.password">Login</button>
+                    </div>
+
+            </form>
+
+    </div>
+
+    <div style="border:1px solid;" *ngIf="isForgotPassword">
+
+        <br>
+        <h5 class="text-center">Forgot Password</h5>
+        <form [formGroup]="forgotPasswordForm">
+
+            <div class="form-row" style="display:flex;justify-content:center;">
+                <div class="form-group" style="margin-right:140px;">
+                    <label for="dob" >Date of Birth</label>
+                    <input type="date" formControlName="dob" class="form-control"  >
+                   
+                </div>
+              
+                </div>
+        
+            <div class="form-row" style="display:flex;justify-content:center;">
+            <div class="form-group" style="margin-right:100px;">
+                <label for="email">Email</label>
+                <input type="email" formControlName="email" class="form-control" >
+            </div>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-primary mr-1" (click)="forgotPassword()">Go</button>
+                </div>
+        
+            </form>
+
+        </div>
+
+        <div style="border:1px solid;" *ngIf="isReset">
+
+            <br>
+            <h5 class="text-center">Reset Password</h5>
+            <form [formGroup]="resetPasswordForm">
+    
+                <div class="form-row" style="display:flex;justify-content:center;">
+                    <div class="form-group" style="margin-right:100px;">
+                        <label for="password">New Password</label>
+                        <input type="password" formControlName="newPassword" class="form-control" >
+                    </div>
+                    </div>
+            
+                <div class="form-row" style="display:flex;justify-content:center;">
+                <div class="form-group" style="margin-right:100px;">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" formControlName="confirmPassword" class="form-control" >
+                    <div *ngIf="f1['confirmPassword'].errors">
+                        <div *ngIf="f1['confirmPassword'].errors['passwordMismatch']">
+                            <span class="text-danger">
+                                Password Mismatch
+                            </span>
+                        </div>
+                        </div>
+                </div>
+             
+                </div>
+    
+                <div class="text-center">
+                    <button class="btn btn-primary mr-1" (click)="resetPassword()">RESET</button>
+                    </div>
+            
+                </form>
+    
+            </div>
+    
+</div>

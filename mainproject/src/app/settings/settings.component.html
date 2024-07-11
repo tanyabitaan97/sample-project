@@ -1,0 +1,67 @@
+<table style="margin-left:300px;">
+  <thead>
+    <tr>
+      <th scope="col" style="border-right:1px solid;width:200px;cursor:pointer;"
+       [class.highlighter]="isSettings" (click)="settingsValue()">
+        Profile Settings</th>
+      <th scope="col" style="border-right:1px solid;width:200px;cursor:pointer;" 
+      [class.highlighter]="isChangePassword" (click)="changePasswordValue()">
+        Change Password</th>
+    </tr>
+  </thead>
+
+  <div *ngIf="isSettings">
+  <tr>
+    <td><input type="text" [(ngModel)]="firstName"></td>
+    <td><input type="text" [(ngModel)]="lastName"></td>
+  </tr>
+
+  <tr>
+    <td>{{user.email}}</td>
+    <td><input type="text" [(ngModel)]="dob"></td>
+  </tr>
+
+  <tr>
+    <td><button class="btn btn-primary mr-1" (click)="updateUser()">Save</button></td>
+  </tr>
+</div>
+</table>
+
+<table>
+<div *ngIf="isChangePassword" style="margin-left:300px;">
+
+    <form [formGroup]="resetPasswordForm">
+      <tr><td style="width:400px;">      
+            <label for="password">New Password</label>
+            <input type="password" formControlName="newPassword" class="form-control" >
+       
+        </td></tr>
+
+  <tr><td>  
+   
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" formControlName="confirmPassword" class="form-control" >
+        <div *ngIf="f1['confirmPassword'].errors">
+            <div *ngIf="f1['confirmPassword'].errors['passwordMismatch']">
+                <span class="text-danger">
+                    Password Mismatch
+                </span>
+            </div>
+            </div>
+   
+ 
+   </td></tr>
+    
+      
+
+        <div class="text-center">
+            <button class="btn btn-primary mr-1" (click)="resetPassword()">SAVE</button>
+            </div>
+    
+        </form>
+
+ 
+
+</div>
+
+</table>
